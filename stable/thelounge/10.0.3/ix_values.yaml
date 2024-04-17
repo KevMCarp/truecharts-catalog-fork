@@ -1,0 +1,29 @@
+image:
+  repository: tccr.io/truecharts/thelounge
+  pullPolicy: IfNotPresent
+  tag: v4.4.1@sha256:e2f23e19fe7a42e93746757d3c7ed6721d80cdc983620413ab069da7b0314358
+service:
+  main:
+    ports:
+      main:
+        port: 10061
+        targetPort: 9000
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    runAsNonRoot: false
+    runAsUser: 0
+    runAsGroup: 0
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env:
+            THELOUNGE_HOME: "/config"

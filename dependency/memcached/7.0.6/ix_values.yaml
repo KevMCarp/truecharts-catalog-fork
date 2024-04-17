@@ -1,0 +1,19 @@
+image:
+  repository: tccr.io/truecharts/memcached
+  pullPolicy: IfNotPresent
+  tag: v1.6.21@sha256:a4405d38745d617d73119228f0043b72f80007af25735743e1c3ac86da75d4ac
+
+service:
+  main:
+    ports:
+      main:
+        port: 11211
+        protocol: tcp
+        targetPort: 11211
+
+portal:
+  open:
+    enabled: false
+
+manifestManager:
+  enabled: false

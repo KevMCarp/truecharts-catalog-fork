@@ -1,0 +1,55 @@
+image:
+  repository: tccr.io/truecharts/esphome
+  pullPolicy: IfNotPresent
+  tag: v2023.6.4@sha256:ab8672be9a1278e3a3a2d994be23e5d474165dac2c77c0064cc967c4489b3cfd
+
+securityContext:
+  container:
+    runAsNonRoot: false
+    readOnlyRootFilesystem: false
+    privileged: true
+    allowPrivilegeEscalation: true
+    runAsUser: 0
+    runAsGroup: 0
+
+service:
+  main:
+    ports:
+      main:
+        port: 6052
+        targetPort: 6052
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              type: http
+              path: /
+            readiness:
+              type: http
+              path: /
+            startup:
+              type: http
+              path: /
+          env:
+            ESPHOME_DASHBOARD_USE_PING: false
+            ESPHOME_DASHBOARD_RELATIVE_URL: /
+            # ESPHOME_QUICKWIZARD:
+            # ESPHOME_IS_HASSIO:
+            # DISABLE_HA_AUTHENTICATION:
+            # USERNAME:
+            # PASSWORD:
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+  platformio:
+    enabled: true
+    mountPath: /.platformio
+portal:
+  open:
+    enabled: true

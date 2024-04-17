@@ -1,0 +1,194 @@
+image:
+  repository: tccr.io/truecharts/minecraft-java
+  tag: v2023.4.1@sha256:c176a9bed87e36f89a79d0927e45677ad5b88edf0452d89934714dcce5243cb7
+  pullPolicy: Always
+j20Image:
+  repository: tccr.io/truecharts/minecraft-java20
+  tag: latest@sha256:897e4e94c64d46f68858a291079fb53721a638c58b338f6c38ba85615cf1d736
+  pullPolicy: Always
+j20AlpineImage:
+  repository: tccr.io/truecharts/minecraft-java20-alpine
+  tag: v2023.4.1@sha256:2399cba3c7599b9dd50cba372b5051f01e5e07882dd0258759eb2b721fd41abd
+  pullPolicy: Always
+j17j9Image:
+  repository: tccr.io/truecharts/minecraft-java17-openj9
+  tag: v2023.4.1@sha256:a0c78f26955bdd19117db78f008749345af9fbdce7be4724efddeb4e1aea4495
+  pullPolicy: Always
+j17jdkImage:
+  repository: tccr.io/truecharts/minecraft-java17-jdk
+  tag: v2023.4.1@sha256:281daf069cecacf710e2f3b7b8bdb4882e96bf655605204b2f33f259b5f8cbc9
+  pullPolicy: Always
+j17gceImage:
+  repository: tccr.io/truecharts/minecraft-java17-graalvm-ce
+  tag: latest@sha256:20e8f1dd890f9ef49a58e865039496a13dd9e46dde723f335cf037122b83a0b2
+  pullPolicy: Always
+j17alpineImage:
+  repository: tccr.io/truecharts/minecraft-java17-alpine
+  tag: v2023.4.1@sha256:f89317c45ae57345d756b5711d348288141248a01de6f9d8b3ba8893ffb2fc59
+  pullPolicy: Always
+j11Image:
+  repository: tccr.io/truecharts/minecraft-java11
+  tag: latest@sha256:de15c958a648cad5a0813a528e36ab8e78e84f95e572c291aa3e4de36aae5556
+  pullPolicy: Always
+j11jdkImage:
+  repository: tccr.io/truecharts/minecraft-java11-jdk
+  tag: v2023.4.1@sha256:b0e951b55d1b91a1bb6a6ae7b7585526b60d95bd34e11281de7e701197b1d34c
+  pullPolicy: Always
+j11j9Image:
+  repository: tccr.io/truecharts/minecraft-java11-openj9
+  tag: v2023.4.1@sha256:1d15fe6df28051934505a0eb52331dfac63dd506bcc9d6f7179a58184aed5028
+  pullPolicy: Always
+j8Image:
+  repository: tccr.io/truecharts/minecraft-java8
+  tag: latest@sha256:59b850aed3a9507932bd8266c8d0d5ff3a3baecb94c43ebec931d6871c497353
+  pullPolicy: Always
+j8gceImage:
+  repository: tccr.io/truecharts/minecraft-java8-graalvm-ce
+  tag: latest@sha256:7564fd2bb91bc84bfa2bfeb2d3f4331329066771716d2d03482a57774ceb3afa
+  pullPolicy: Always
+j8jdkImage:
+  repository: tccr.io/truecharts/minecraft-java8-jdk
+  tag: v2023.4.1@sha256:f9d8a8f43b98977eecd72d234e10d943c8e567ff10aefd425476ddc2633d43aa
+  pullPolicy: Always
+j8j9Image:
+  repository: tccr.io/truecharts/minecraft-java8-openj9
+  tag: v2023.4.1@sha256:8ef5e9d3e25d32a541f89d616289003f5cee8b15cb0569e79b2e778d3b0b68d4
+  pullPolicy: Always
+
+service:
+  main:
+    enabled: true
+    ports:
+      main:
+        enabled: true
+        protocol: tcp
+        port: 25565
+      query:
+        enabled: true
+        protocol: udp
+        port: 25565
+  rcon:
+    enabled: true
+    ports:
+      rcon:
+        enabled: true
+        port: 25575
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          imageSelector: image
+          probes:
+            liveness:
+              enabled: true
+              type: exec
+              command:
+                - mc-health
+            readiness:
+              enabled: true
+              type: exec
+              command:
+                - mc-health
+            startup:
+              enabled: true
+              type: exec
+              command:
+                - mc-health
+          env:
+            SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
+            QUERY_PORT: "{{ .Values.service.main.ports.query.port }}"
+            RCON_PORT: "{{ .Values.service.rcon.ports.rcon.port }}"
+            ENABLE_QUERY: "true"
+            EULA: "TRUE"
+            GUI: "FALSE"
+            OVERRIDE_SERVER_PROPERTIES: true
+            VERSION: "LATEST"
+            TYPE: "VANILLA"
+            DIFFICULTY: easy
+            MAX_PLAYERS: 20
+            MAX_WORLD_SIZE: 10000
+            ALLOW_NETHER: true
+            ANNOUNCE_PLAYER_ACHIEVEMENTS: true
+            ENABLE_COMMAND_BLOCK: false
+            FORCE_GAMEMODE: false
+            GENERATE_STRUCTURES: true
+            HARDCORE: false
+            MAX_BUILD_HEIGHT: 256
+            MAX_TICK_TIME: 60000
+            SPAWN_ANIMALS: true
+            SPAWN_MONSTERS: true
+            SPAWN_NPCS: true
+            VIEW_DISTANCE: 16
+            MODE: survival
+            MOTD: "Welcome to Minecraft on TrueNAS Scale!"
+            PVP: false
+            LEVEL_TYPE: DEFAULT
+            LEVEL: world
+            ONLINE_MODE: true
+            MEMORY: 2048M
+            RCON_PASSWORD: "secretrconpass"
+            # CUSTOM_SERVER: ""
+            # QUILT_LOADER_VERSION: ""
+            # QUILT_LAUNCHER: ""
+            # QUILT_LAUNCHER_URL: ""
+            # PUFFERFISH_BUILD: "lastSuccessfulBuild"
+            # FORGEVERSION: ""
+            # FORGE_INSTALLER: ""
+            # FORGE_INSTALLER_URL: ""
+            # FABRIC_LOADER_VERSION: ""
+            # FABRIC_INSTALLER: ""
+            # FABRIC_INSTALLER_URL: ""
+            # SPIGOT_DOWNLOAD_URL: ""
+            # BUILD_FROM_SOURCE: false
+            # BUKKIT_DOWNLOAD_URL: ""
+            # PAPERBUILD: ""
+            # PAPER_DOWNLOAD_URL: ""
+            # PACKWIZ_URL: ""
+            # AIRPLANE_BUILD: "lastSuccessfulBuild"
+            # MAGMA_CHANNEL: "stable"
+            # MOHIST_BUILD: ""
+            # CANYON_BUILD: ""
+            # SPONGEBRANCH: "STABLE"
+            # SPONGEVERSION: ""
+            # LIMBO_BUILD: "LATEST"
+            # LIMBO_SCHEMA_FILENAME: "default.schem"
+            # CRUCIBLE_RELEASE: "latest"
+            # FTB_MODPACK_ID: ""
+            # FTB_MODPACK_VERSION_ID: ""
+            # CF_SERVER_MOD: ""
+            # CF_BASE_DIR: ""
+            # USE_MODPACK_START_SCRIPT: true
+            # FTB_LEGACYJAVAFIXER: false
+            # WHITELIST: ""
+            # OPS: ""
+            # ICON: ""
+            # SEED: ""
+            # GENERATOR_SETTINGS: ""
+            # WORLD: ""
+            # FORCE_REDOWNLOAD: false
+            # USE_FLARE_FLAGS: false
+            # USE_AIKAR_FLAGS: true
+            # USE_SIMD_FLAGS: false
+            # JVM_OPTS: ""
+            # JVM_XX_OPTS: ""
+            # CF_API_KEY
+            # CF_PAGE_URL
+            # CF_SLUG
+            # CF_EXCLUDE_INCLUDE_FILE
+            # CF_EXCLUDE_MODS
+            # CF_FORCE_INCLUDE_MODS
+            # CF_FORCE_SYNCHRONIZE
+            # CF_OVERRIDES_SKIP_EXISTING
+            # CF_PARALLEL_DOWNLOADS
+            # CF_SET_LEVEL_FROM
+
+persistence:
+  data:
+    enabled: true
+    mountPath: "/data"
+
+portal:
+  open:
+    enabled: false

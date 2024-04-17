@@ -1,0 +1,9 @@
+
+
+## [babybuddy-12.0.26](https://github.com/truecharts/charts/compare/babybuddy-12.0.25...babybuddy-12.0.26) (2023-06-14)
+
+### Chore
+
+- update container image tccr.io/truecharts/babybuddy to v1.16.0 ([#9608](https://github.com/truecharts/charts/issues/9608))
+  
+  

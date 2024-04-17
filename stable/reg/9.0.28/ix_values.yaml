@@ -1,0 +1,17 @@
+image:
+  repository: tccr.io/truecharts/dockerregistry
+  pullPolicy: IfNotPresent
+  tag: v2@sha256:5b6a8cf8b53977196702c182896ab48bbbadc21155b8dd1db778a08f248a4b2c
+service:
+  main:
+    ports:
+      main:
+        port: 10096
+        targetPort: 8080
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+portal:
+  open:
+    enabled: true

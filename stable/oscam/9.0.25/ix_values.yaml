@@ -1,0 +1,25 @@
+image:
+  repository: tccr.io/truecharts/oscam
+  pullPolicy: IfNotPresent
+  tag: v11719@sha256:1b68670f987db7b9b7ac8e8295be308737977af6e79d3f5af77450cfffccedaf
+service:
+  main:
+    ports:
+      main:
+        port: 10062
+        targetPort: 8888
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+  varrun:
+    enabled: true
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: false
+    runAsUser: 0
+    runAsGroup: 20

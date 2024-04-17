@@ -1,0 +1,40 @@
+image:
+  repository: tccr.io/truecharts/radarr
+  pullPolicy: IfNotPresent
+  tag: v4.5.2.7388@sha256:d8f171e0839223a7ae8e6584d2aac4ce14b6869622f8298cacedfff48bd93554
+service:
+  main:
+    ports:
+      main:
+        port: 7878
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            readiness:
+              enabled: true
+              type: http
+              path: /ping
+            liveness:
+              enabled: true
+              type: http
+              path: /ping
+            startup:
+              enabled: true
+              type: http
+              path: /ping
+
+          env:
+            RADARR__PORT: "{{ .Values.service.main.ports.main.port }}"

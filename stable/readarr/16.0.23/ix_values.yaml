@@ -1,0 +1,45 @@
+image:
+  repository: tccr.io/truecharts/readarr
+  pullPolicy: IfNotPresent
+  tag: v0.1.8.1889@sha256:364f73d7e399b8d17fef4310affd5fd7af90cfcb6d3994c1f551be4e32af59b3
+service:
+  main:
+    ports:
+      main:
+        port: 8787
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              enabled: true
+              ## Set this to true if you wish to specify your own livenessProbe
+              custom: true
+              ## The spec field contains the values for the default livenessProbe.
+              ## If you selected custom: true, this field holds the definition of the livenessProbe.
+              spec:
+                exec:
+                  command:
+                    - /usr/bin/env
+                    - bash
+                    - -c
+                    - curl --fail localhost:8787/api/v1/system/status?apiKey=`IFS=\> && while read -d \< E C; do if [[ $E = "ApiKey" ]]; then echo $C; fi; done < /config/config.xml`
+                failureThreshold: 5
+                initialDelaySeconds: 60
+                periodSeconds: 10
+                successThreshold: 1
+                timeoutSeconds: 10
+          env:
+            READARR__PORT: "{{ .Values.service.main.ports.main.port }}"

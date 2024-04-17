@@ -1,0 +1,30 @@
+apiVersion: v2
+appVersion: "9.3.0"
+dependencies:
+  - name: common
+    repository: https://library-charts.truecharts.org
+    version: 13.2.2
+deprecated: false
+description: Apache Solr
+home: https://truecharts.org/charts/dependency/solr
+icon: https://truecharts.org/img/hotlink-ok/chart-icons/solr.png
+keywords:
+  - solr
+  - apache
+  - search
+kubeVersion: ">=1.16.0-0"
+maintainers:
+  - email: info@truecharts.org
+    name: TrueCharts
+    url: https://truecharts.org
+name: solr
+sources:
+  - https://github.com/truecharts/charts/tree/master/charts/dependency/solr
+  - https://github.com/apache/solr
+type: application
+version: 5.0.6
+annotations:
+  truecharts.org/catagories: |
+    - search
+  truecharts.org/SCALE-support: "true"
+  truecharts.org/grade: U

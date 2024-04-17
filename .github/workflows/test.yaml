@@ -1,0 +1,58 @@
+name: Sync multiple branches
+
+concurrency: catalog-test
+
+on:
+  push:
+    branches:
+      - 'staging'
+  workflow_dispatch:
+
+jobs:
+  test-and-sync:
+    name: Test and Sync SCALE Catalog
+    runs-on: ubuntu-latest
+    steps:
+          
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        name: Checkout
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        name: Checkout-validate
+        with:
+          fetch-depth: 1
+          repository: truecharts/catalog_validation
+          token: ${{ secrets.BOT_TOKEN }}
+          path: .catalog_validation
+          
+      - name: install catalog_validation
+        shell: bash
+        run: |
+          cd .catalog_validation
+          pip install -r requirements.txt
+          pip install -U --no-cache-dir .
+          cd -
+
+      - name: catalog tests
+        shell: bash
+        run: |
+          echo "Starting Catalog Validation"
+          python3 .catalog_validation/catalog_validation/scripts/catalog_validate.py validate --path "${PWD}" --ignore-catalog-json
+
+      - name: catalog json generation
+        shell: bash
+        run: |
+          echo "Starting Catalog json Generation"
+          python3 .catalog_validation/catalog_validation/scripts/catalog_update.py update --path "${PWD}"
+
+      - name: Merge staging into main
+        shell: bash
+        run: |
+          cd "/home/runner/work/catalog/catalog/"
+          git config user.name "TrueCharts-Bot"
+          git config user.email "bot@truecharts.org"
+          git add catalog.json || echo "Adding catalog.json failed"
+          git commit --all -m "Commit catalog.json" || echo "Commiting catalog.json failed"
+          git push -f origin staging:main

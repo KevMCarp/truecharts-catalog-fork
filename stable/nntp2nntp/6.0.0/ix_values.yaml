@@ -1,0 +1,36 @@
+image:
+  repository: tccr.io/truecharts/nntp2nntp
+  pullPolicy: IfNotPresent
+  tag: v0.3.20230704@sha256:42828d568e2059606ab09145f40ae64f03f9037d154a603bcb59af3bcd7947f4
+service:
+  main:
+    ports:
+      main:
+        targetPort: 1563
+        port: 1563
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+  varrun:
+    enabled: true
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    runAsNonRoot: false
+    runAsUser: 0
+    runAsGroup: 0
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              type: tcp
+            readiness:
+              type: tcp
+            startup:
+              type: tcp

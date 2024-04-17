@@ -1,0 +1,49 @@
+image:
+  repository: tccr.io/truecharts/tvheadend
+  pullPolicy: IfNotPresent
+  tag: latest@sha256:c108412b5a0783fc511264e8b766ccc7540b8e8372438be7baddaebe5ca1f7ad
+service:
+  main:
+    ports:
+      main:
+        port: 9981
+        targetPort: 9981
+  htsp:
+    enabled: true
+    ports:
+      htsp:
+        enabled: true
+        port: 9982
+        targetPort: 9982
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+  varrun:
+    enabled: true
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    runAsNonRoot: false
+    readOnlyRootFilesystem: false
+    runAsUser: 0
+    runAsGroup: 0
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              type: tcp
+              port: "{{ .Values.service.main.ports.main.port }}"
+            readiness:
+              type: tcp
+              port: "{{ .Values.service.main.ports.main.port }}"
+            startup:
+              type: tcp
+              port: "{{ .Values.service.main.ports.main.port }}"
+          env:
+            RUN_OPTS: ""

@@ -1,0 +1,54 @@
+image:
+  repository: tccr.io/truecharts/babybuddy
+  pullPolicy: IfNotPresent
+  tag: v1.16.0@sha256:3466885c06c3ae694777cd710e5f0faa8947ec2b6a8cfcbc38ddd2d35b6cb09b
+
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: false
+    runAsUser: 0
+    runAsGroup: 0
+
+service:
+  main:
+    ports:
+      main:
+        port: 10069
+        protocol: http
+        targetPort: 8000
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env:
+            DB_ENGINE: "django.db.backends.postgresql"
+            DB_NAME: "{{ .Values.cnpg.main.database }}"
+            DB_USER: "{{ .Values.cnpg.main.user }}"
+            DB_PORT: "5432"
+            CSRF_TRUSTED_ORIGINS: ""
+            DB_PASSWORD:
+              secretKeyRef:
+                name: cnpg-main-user
+                key: password
+            DB_HOST:
+              secretKeyRef:
+                name: cnpg-main-urls
+                key: host
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+
+cnpg:
+  main:
+    enabled: true
+    user: babybuddy
+    database: babybuddy
+
+portal:
+  open:
+    enabled: true

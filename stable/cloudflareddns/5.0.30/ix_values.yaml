@@ -1,0 +1,64 @@
+image:
+  repository: tccr.io/truecharts/cloudflareddns
+  pullPolicy: IfNotPresent
+  tag: latest@sha256:8fcb7993ec88b58cca3a2726bdb9ec55eaa91cca14c3d2789e25f96ba3d2dc7b
+
+securityContext:
+  container:
+    runAsNonRoot: false
+    readOnlyRootFilesystem: false
+    runAsUser: 0
+    runAsGroup: 0
+
+cloudflareddns:
+  user: your.cf.email@example.com
+  api_token: ""
+  api_key: ""
+  api_token_zone: ""
+  interval: 300
+  detect_mode: dig-whoami.cloudflare
+  detect_override: ""
+  log_level: 3
+  host_zone_record: []
+  # - domain: example.com
+#   zone: A1jajaja
+#   record: A
+# - domain: foobar.com
+#   zone: B1aksksa
+#   record: A
+# - domain: foobar.com
+#   zone: Cs11kdkkasks
+#   record: AAAA
+
+service:
+  main:
+    enabled: false
+    ports:
+      main:
+        enabled: false
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+          envFrom:
+            - secretRef:
+                name: "secret"
+          env: {}
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+
+portal:
+  open:
+    enabled: false

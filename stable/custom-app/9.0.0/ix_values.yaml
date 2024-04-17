@@ -1,0 +1,21 @@
+image:
+  repository: tccr.io/truecharts/jackett
+  pullPolicy: IfNotPresent
+  tag: v0.20.4145@sha256:d973af3c8d5381da474180bfcd952d260a3bb0f541d4084bca107f259e58e46b
+
+portal:
+  open:
+    enabled: false
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              type: tcp
+            readiness:
+              type: tcp
+            startup:
+              type: tcp
