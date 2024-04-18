@@ -5,17 +5,16 @@
         "healthy_error": null,
         "location": "/home/runner/work/catalog/catalog/incubator/librephotos",
         "last_update": "2023-08-04 13:43:38",
-        "human_version": "2022w6_8.0.0",
-        "version": "8.0.0",
-        "chart_metadata" : null,
-        "app_metadata": null,
         "required_features": [
             "normalize/interfaceConfiguration",
             "definitions/certificate",
             "definitions/interface",
             "definitions/timezone"
         ],
-        "app_readme": "<p>A self-hosted open source photo management service.</p>\n<p>This App is supplied by TrueCharts, for more information visit the manual: <a href=\"https://truecharts.org/charts/incubator/librephotos\">https://truecharts.org/charts/incubator/librephotos</a></p>\n<hr />\n<p>TrueCharts can only exist due to the incredible effort of our staff.\nPlease consider making a <a href=\"https://truecharts.org/sponsor\">donation</a> or contributing back to the project any way you can!</p>",
+        "human_version": "2022w6_8.0.0",
+        "version": "8.0.0",
+        "chart_metadata": {},
+        "app_metadata": null,
         "categories": [
             "media"
         ],
@@ -3665,6 +3664,9 @@
             "latest_version": "8.0.0",
             "latest_app_version": "2022w6",
             "latest_human_version": "2022w6_8.0.0"
-        }
+        },
+        "app_readme": "<p>A self-hosted open source photo management service.</p>\n<p>This App is supplied by TrueCharts, for more information visit the manual: <a href=\"https://truecharts.org/charts/incubator/librephotos\">https://truecharts.org/charts/incubator/librephotos</a></p>\n<hr />\n<p>TrueCharts can only exist due to the incredible effort of our staff.\nPlease consider making a <a href=\"https://truecharts.org/sponsor\">donation</a> or contributing back to the project any way you can!</p>",
+        "detailed_readme": "<p>A self-hosted open source photo management service.</p>\n<p>This App is supplied by TrueCharts, for more information visit the manual: <a href=\"https://truecharts.org/charts/incubator/librephotos\">https://truecharts.org/charts/incubator/librephotos</a></p>\n<hr />\n<p>TrueCharts can only exist due to the incredible effort of our staff.\nPlease consider making a <a href=\"https://truecharts.org/sponsor\">donation</a> or contributing back to the project any way you can!</p>",
+        "changelog" : ""
     }
 }
