@@ -179,11 +179,11 @@ persistence:
   librephotos-config:
     enabled: "true"
     mountPath: "/etc/nginx/nginx.conf"
+    name: '{{ printf "%v-config" (include "tc.v1.common.names.fullname" .) }}'
     subPath: "nginx-config"
-    type: "pvc"
-    volumeSpec:
-      configMap:
-        name: '{{ printf "%v-config" (include "tc.v1.common.names.fullname" .) }}'
+    type: "configmap"
+        
 
 portal:
-  enabled: true
+  open:
+    enabled: true
