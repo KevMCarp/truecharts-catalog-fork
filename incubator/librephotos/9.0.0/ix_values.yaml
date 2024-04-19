@@ -180,10 +180,10 @@ persistence:
     enabled: "true"
     mountPath: "/etc/nginx/nginx.conf"
     subPath: "nginx-config"
-    type: "custom"
+    type: "pvc"
     volumeSpec:
       configMap:
-        name: '{{ printf "%v-config" (include "tc.common.names.fullname" .) }}'
+        name: '{{ printf "%v-config" (include "tc.v1.common.names.fullname" .) }}'
 
 portal:
   enabled: true
