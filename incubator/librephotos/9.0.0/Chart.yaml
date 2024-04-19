@@ -8,11 +8,10 @@ dependencies:
     alias: ""
     tags: []
     import-values: []
-  - condition: redis.enabled
-    name: redis
+  - name: redis
     repository: oci://tccr.io/truecharts
     version: 13.3.7
-    condition: ""
+    condition: redis.enabled
     alias: ""
     tags: []
     import-values: []
