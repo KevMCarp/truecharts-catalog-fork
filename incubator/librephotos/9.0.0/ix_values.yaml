@@ -180,8 +180,8 @@ persistence:
     enabled: true
     type: configmap
     objectName: "librephotos-config"
-      nginx:
-        nginx:
+      librephotos-config:
+        librephotos-config:
           mountPath: "/etc/nginx/nginx.conf"
           subPath: nginx.conf
           readOnly: true
