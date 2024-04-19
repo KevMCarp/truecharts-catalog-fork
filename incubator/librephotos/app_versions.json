@@ -33,10 +33,10 @@
         "tags": [],
         "screenshots": [],
         "sources": [
-            "https://github.com/truecharts/charts/tree/master/charts/incubator/librephotos",
+            "https://github.com/KevMCarp/truecharts-catalog-fork/tree/main/incubator",
             "https://github.com/LibrePhotos/librephotos"
         ],
-        "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/librephotos.png",
+        "icon_url": "https://docs.librephotos.com/img/logo-round.png",
         "schema": {
             "groups": [
                 {

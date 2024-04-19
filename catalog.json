@@ -1477,10 +1477,10 @@
             "healthy_error": null,
             "home": "https://truecharts.org/charts/incubator/librephotos",
             "location": "/home/runner/work/catalog/catalog/incubator/librephotos",
-            "latest_version": "8.0.0",
-            "latest_app_version": "2022w6",
-            "latest_human_version": "2022w6_8.0.0",
-            "last_update": "2023-08-04 13:43:38",
+            "latest_version": "9.0.0",
+            "latest_app_version": "2024w14p1",
+            "latest_human_version": "2024w14p1_9.0.0",
+            "last_update": "2024-04-19 11:21:38",
             "name": "librephotos",
             "recommended": false,
             "title": "Librephotos",
@@ -1494,10 +1494,10 @@
             "tags": [],
             "screenshots": [],
             "sources": [
-                "https://github.com/truecharts/charts/tree/master/charts/incubator/librephotos",
+                "https://github.com/KevMCarp/truecharts-catalog-fork/tree/main/incubator",
                 "https://github.com/LibrePhotos/librephotos"
             ],
-            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/librephotos.png"
+            "icon_url": "https://docs.librephotos.com/img/logo-round.png"
         },
         "google-cloud-storage-backup": {
             "app_readme": "<p>A simple way to backup important files to Google Cloud Storage.</p>\n<p>This App is supplied by TrueCharts, for more information visit the manual: <a href=\"https://truecharts.org/charts/incubator/google-cloud-storage-backup\">https://truecharts.org/charts/incubator/google-cloud-storage-backup</a></p>\n<hr />\n<p>TrueCharts can only exist due to the incredible effort of our staff.\nPlease consider making a <a href=\"https://truecharts.org/sponsor\">donation</a> or contributing back to the project any way you can!</p>",
