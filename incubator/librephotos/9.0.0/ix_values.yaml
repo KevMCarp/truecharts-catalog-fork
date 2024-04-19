@@ -175,10 +175,10 @@ persistence:
     mountPath: "/logs"
   cache:
     enabled: true
-    type: configmap
     mountPath: "/root/.cache"
   librephotos-config:
     enabled: true
+    type: configmap
     objectName: "librephotos-config"
       nginx:
         nginx:
