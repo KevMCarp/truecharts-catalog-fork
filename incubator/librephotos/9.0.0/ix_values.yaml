@@ -179,7 +179,7 @@ persistence:
   librephotos-config:
     enabled: "true"
     mountPath: "/etc/nginx/nginx.conf"
-    name: '{{ printf "%v-config" (include "tc.v1.common.names.fullname" .) }}'
+    objectName: "librephotos-config"
     subPath: "nginx-config"
     type: "configmap"
         
