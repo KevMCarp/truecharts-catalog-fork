@@ -1,0 +1,43 @@
+apiVersion: v2
+appVersion: "2024w14p1"
+dependencies:
+  - name: common
+    repository: oci://tccr.io/truecharts
+    version: 20.3.7
+    condition: ""
+    alias: ""
+    tags: []
+    import-values: []
+  - condition: postgresql.enabled
+    name: postgresql
+    repository: oci://tccr.io/truecharts
+    version: 14.10.0
+  - condition: redis.enabled
+    name: redis
+    repository: oci://tccr.io/truecharts
+    version: 13.3.7
+    condition: ""
+    alias: ""
+    tags: []
+    import-values: []
+description: "A self-hosted open source photo management service."
+home: https://truecharts.org/charts/incubator/librephotos
+icon: https://docs.librephotos.com/img/logo-round.png
+keywords:
+  - photos
+  - gallery
+kubeVersion: ">=1.16.0-0"
+maintainers:
+  - email: info@truecharts.org
+    name: TrueCharts
+    url: https://truecharts.org
+name: librephotos
+sources:
+  - https://github.com/KevMCarp/truecharts-catalog-fork/tree/main/incubator
+  - https://github.com/LibrePhotos/librephotos
+version: 9.0.0
+annotations:
+  truecharts.org/catagories: |
+    - media
+  truecharts.org/SCALE-support: "true"
+  truecharts.org/grade: U
